@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Gerador de Relatórios com Koolreport</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<br>
+<div class="card" style="background: #cecccc">
+  <div class="card-body text-center">
+    <h1>Gerador de Relatórios com Koolreport</h1>
+  </div>
+</div>
+<br>
+<h2 align="center">Alguns esclarecimentos sobre este gerador</h2><br>
+<p>Este pequeno gerador de relatórios é experimental e com diversas restrições.<br>
+Praticamente ele gera o relatório de exemplo do repositório:<br><br>
+
+<a href="https://github.com/ribafs/reports/tree/main/exemplos/CarsByDate" target="_blank">CarsByDate</a></b><br>
+
+Que mostra um gráfico de pizza e outro de colunas.<br>
+
+Este gerador tem a intenção de facilitar o trabalho de geração de relatórios, mas ainda requer melhorias para ficar mais útil.<br>
+<br>
+
+<b>Veja algumas dicas para preencher o formulário</b>:<br>
+
+<a href="ajuda.png" target="_blank">Ajuda?</a>
+<br><br>
+<b>Aviso</b><br>
+Aviso aos colegas que usam linux: requer permissão de escrita para o servidor web no diretório vendor/koolreport.
+<br><br>
+
+<b>Como foi criado este gerador?</b><br>
+Uma utilidade extra deste pequeno gerador de relatórios é a de mostrar aos colegas iniciantes em PHP, como se trabalha com geradores, manipulando strings e arquivos com PHP.
+<br><br>
+Basicamente o arquivo index.php faz todo o trabalho do gerador, usando as funções str_replace(), file_get_contente(), file_put_contente() e copy(). Acho isso algo especial nas linnguagens de programação e em especial no PHP. Fazer o computador trabalhar pelo cliente. Ousando, queria pensar e o computador fazer. :).
+<br><br>
+Veja no código que criei uma pasta  report no raiz contendo os 3 arquivos do relatório (copiei do repositório ribafs/koolreport):<br>
+
+- O index.php deixei o mais genérico possível, portanto basta que o gerador o copie de report para vendor/koolreport. Veja:.<br>
+copy('report/index.php','vendor/koolreport/index.php');<br><br>
+- Os outros dois arquivos renomeei de forma a  facilitar minha vida:Report.php e Report.view.php, seguindo o padrão do koolreport.<br>
+- Estes dois arquivos acima contem variáveis que precisam ser substituídas pelos v alores que foram entrados no formulário. Aqui trabalha a função str_repalce para para pegar o valor recebido do formulário e substituir pela variável de cada um dos dois arquivos.<br>
+- Finalmente pego cada um dos dois arquivos acima, e faço uma cópia usando file_put_contents():<br>
+
+file_put_contents('vendor/koolreport/Report.php', $str);<br><br>
+
+A explicação não está detalhada mas se vocẽ se empenhar verá que não é muito complicado e que é muito útil.
+<br><br>
+<b>Veja um exemplo do formulário preenchido</b><br><br>
+
+<img src="form1.png">
+<br>
+<img src="form2.png">
